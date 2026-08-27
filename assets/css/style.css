@@ -247,9 +247,10 @@ h3 { font-size: 1.15rem; }
 .hero-stats span { font-size: .85rem; color: var(--text-faint); }
 
 /* Hero visual — browser mockup */
-.hero-visual { position: relative; height: 420px; }
+.hero-visual { position: relative; height: 490px; }
 .browser-card {
   position: absolute; inset: 0;
+  display: flex; flex-direction: column;
   background: var(--surface);
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
@@ -261,34 +262,101 @@ h3 { font-size: 1.15rem; }
   background: var(--accent-soft);
   z-index: 0;
 }
-.browser-card:not(.browser-card--back) { z-index: 1; }
+.browser-card:not(.browser-card--back) {
+  z-index: 1;
+  animation: browser-float 7s ease-in-out infinite;
+}
+@keyframes browser-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
+/* Browser chrome */
 .browser-bar {
-  display: flex; gap: 6px;
-  padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.browser-dots { display: flex; gap: 6px; flex-shrink: 0; }
+.browser-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+.browser-dots span:nth-child(1) { background: #ff5f57; }
+.browser-dots span:nth-child(2) { background: #febc2e; }
+.browser-dots span:nth-child(3) { background: #28c840; }
+.browser-url {
+  flex: 1;
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: .78rem;
+  color: var(--text-soft);
+  min-width: 0;
+}
+.browser-url span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.browser-url-lock { width: 13px; height: 13px; stroke: var(--success); flex-shrink: 0; }
+.browser-url-refresh { width: 14px; height: 14px; stroke: var(--text-faint); flex-shrink: 0; margin-left: auto; }
+
+/* Mock site content */
+.browser-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; flex: 1; }
+
+.mock-nav {
+  display: flex; align-items: center; gap: 16px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
 }
-.browser-bar span {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--border);
+.mock-brand {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-heading); font-weight: 700; font-size: .95rem;
 }
-.browser-body { padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.mock-brand-dot { width: 18px; height: 18px; border-radius: 6px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+.mock-links { display: flex; gap: 16px; margin-left: 8px; font-size: .78rem; color: var(--text-soft); }
+.mock-navbtn {
+  margin-left: auto;
+  font-size: .76rem; font-weight: 600; color: #fff;
+  background: var(--text);
+  padding: 7px 14px; border-radius: 999px;
+}
 
-.skeleton { background: var(--bg-alt); border-radius: 8px; position: relative; overflow: hidden; }
-.skeleton::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 2.2s infinite;
+.mock-hero { display: flex; flex-direction: column; gap: 12px; }
+.mock-eyebrow {
+  align-self: flex-start;
+  font-size: .68rem; font-weight: 600; letter-spacing: .04em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 5px 11px; border-radius: 999px;
 }
-@keyframes shimmer { 100% { transform: translateX(100%); } }
-.skeleton-title { height: 28px; width: 70%; }
-.skeleton-text { height: 14px; width: 100%; }
-.skeleton-text.short { width: 55%; }
-.skeleton-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0; }
-.skeleton-block { height: 70px; }
-.skeleton-btn { height: 40px; width: 140px; border-radius: 999px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); opacity: .85; }
+.mock-title { font-size: 1.5rem; line-height: 1.2; }
+.mock-title em { font-style: normal; color: var(--accent); }
+.mock-lead { font-size: .82rem; color: var(--text-soft); line-height: 1.55; }
+.mock-cta { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+.mock-btn-primary {
+  font-size: .78rem; font-weight: 600; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 9px 18px; border-radius: 999px;
+}
+.mock-btn-ghost {
+  font-size: .78rem; font-weight: 600; color: var(--text);
+  border: 1px solid var(--border);
+  padding: 9px 18px; border-radius: 999px;
+}
+.mock-rating {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 4px;
+  font-size: .72rem; color: var(--text-faint);
+}
+.mock-stars { color: #f5a623; letter-spacing: 1px; font-size: .8rem; }
+
+.mock-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.mock-stats div { display: flex; flex-direction: column; gap: 2px; }
+.mock-stats strong { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text); }
+.mock-stats span { font-size: .7rem; color: var(--text-faint); }
 
 /* ===== Trust bar ===== */
 .trust { padding: 40px 0; border-block: 1px solid var(--border); }
@@ -522,7 +590,7 @@ h3 { font-size: 1.15rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .skeleton::after { animation: none; }
+  .browser-card:not(.browser-card--back) { animation: none; }
 }
 
 /* ===== Responsive ===== */
@@ -530,7 +598,10 @@ h3 { font-size: 1.15rem; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-visual { height: 340px; order: -1; }
+  .hero-visual { height: auto; order: -1; max-width: 480px; }
+  .browser-card { position: relative; inset: auto; }
+  .browser-card--back { display: none; }
+  .browser-body { height: auto; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
 }
