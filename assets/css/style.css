@@ -630,4 +630,12 @@ h3 { font-size: 1.15rem; }
   .price-card--featured { transform: none; }
   .section { padding: 80px 0; }
   .hero { padding-top: calc(var(--header-h) + 56px); }
+
+
+  .hero-visual{
+    display: none;
+  }
+
+
+
 }
